@@ -30,17 +30,19 @@ document.addEventListener('DOMContentLoaded', function() {
         ]
     });
 
-    wavesurfer.util
-        .fetchFile({
-            responseType: 'json',
-            url: 'rashomon.json'
-        })
-        .on('success', function(data) {
-            wavesurfer.load(
-                'http://www.archive.org/download/mshortworks_001_1202_librivox/msw001_03_rashomon_akutagawa_mt_64kb.mp3',
-                data
-            );
-        });
+    wavesurfer.load('../media/meetyou.mp3');
+
+    // wavesurfer.util
+    //     .fetchFile({
+    //         responseType: 'json',
+    //         url: 'rashomon.json'
+    //     })
+    //     .on('success', function(data) {
+    //         wavesurfer.load(
+    //             'http://www.archive.org/download/mshortworks_001_1202_librivox/msw001_03_rashomon_akutagawa_mt_64kb.mp3',
+    //             data
+    //         );
+    //     });
 
     /* Regions */
 
@@ -97,6 +99,8 @@ document.addEventListener('DOMContentLoaded', function() {
         playButton.style.display = '';
         pauseButton.style.display = 'none';
     });
+
+    
 });
 
 /**

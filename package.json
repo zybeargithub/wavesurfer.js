@@ -95,14 +95,6 @@
     "webpack-merge": "^4.2.1"
   },
   "homepage": "https://github.com/katspaugh/wavesurfer.js",
-  "pre-commit": "lint-and-format-staged",
-  "lint-staged": {
-    "*.js": [
-      "prettier",
-      "eslint"
-    ],
-    "*.html": [
-      "htmlhint"
-    ]
-  }
+  
+  
 }
