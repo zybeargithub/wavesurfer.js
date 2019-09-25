@@ -12,7 +12,7 @@ const FINISHED = 'finished';
  */
 export default class WebAudio extends util.Observer {
 	/** @private */
-	static scriptBufferSize = 256;
+	static scriptBufferSize = 256; // 定义静态属性
 	/** @private */
 	audioContext = null;
 	/** @private */

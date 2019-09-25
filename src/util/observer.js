@@ -34,11 +34,11 @@ export default class Observer {
 
 		let handlers = this.handlers[event];
 		if (!handlers) {
-			handlers = this.handlers[event] = [];
+			handlers = this.handlers[event] = []; // 从右往左赋值
 		}
 		handlers.push(fn);
 
-		// Return an event descriptor
+		// Return an event descriptor（描述符）
 		return {
 			name: event,
 			callback: fn,
@@ -63,8 +63,8 @@ export default class Observer {
 		if (handlers) {
 			if (fn) {
 				for (i = handlers.length - 1; i >= 0; i--) {
-					if (handlers[i] == fn) {
-						handlers.splice(i, 1);
+					if (handlers[i] == fn) { // fn可以直接用==来判断，其实确定是否同一个fn对象实例
+						handlers.splice(i, 1); // 采用倒叙删除法，可在循环中删除数组项【典型用法】
 					}
 				}
 			} else {
@@ -83,12 +83,15 @@ export default class Observer {
 	/**
 	 * Attach a handler to an event. The handler is executed at most once per
 	 * event type.
+   * 原理：在执行函数体内注册一个定时器，在执行完毕后用来清除fn监听
+   * 巧妙使用setTimeout的作用
 	 *
 	 * @param {string} event The event to listen to
 	 * @param {function} handler The callback that is only to be called once
 	 * @return {ListenerDescriptor} The event descriptor
 	 */
 	once(event, handler) {
+    // rest参数，es6新语法，形式：...变量名称
 		const fn = (...args) => {
 			/*  eslint-disable no-invalid-this */
 			handler.apply(this, args);

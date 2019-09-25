@@ -6,7 +6,7 @@
  * @example console.log(max([1, 2, 3])); // logs 3
  */
 export default function max(values) {
-	let largest = -Infinity;
+	let largest = -Infinity; // -Infinity 无穷小的值
 	Object.keys(values).forEach(i => {
 		if (values[i] > largest) {
 			largest = values[i];

@@ -18,7 +18,7 @@ import PeakCache from './peakcache';
 
 /**
  * @typedef {Object} WavesurferParams
- * @property {AudioContext} audioContext=null Use your own previously
+ * @property {AudioContext} audioContext =null Use your own previously
  * initialized AudioContext or leave blank.
  * @property {number} audioRate=1 Speed at which to play audio. Lower number is
  * slower.
@@ -198,7 +198,8 @@ class PluginClass {
  * wavesurfer.load('example/media/demo.wav');
  */
 export default class WaveSurfer extends util.Observer {
-	/** @private */
+  /** @private */
+  // 【note】定义默认属性，默认属性的定义是一种通用库的范式，提供一套默认的行为和表现
 	defaultParams = {
 		audioContext: null,
 		audioScriptProcessor: null,
@@ -272,6 +273,8 @@ export default class WaveSurfer extends util.Observer {
 	/**
 	 * Functions in the `util` property are available as a prototype property to
 	 * all instances
+   * 
+   * 对外暴露
 	 *
 	 * @type {Object}
 	 * @example
@@ -283,7 +286,7 @@ export default class WaveSurfer extends util.Observer {
 	/**
 	 * Functions in the `util` property are available as a static property of the
 	 * WaveSurfer class
-	 *
+	 * 对外暴露成静态接口，方便使用
 	 * @type {Object}
 	 * @example
 	 * WaveSurfer.util.style(myElement, { background: 'blue' });
@@ -411,7 +414,9 @@ export default class WaveSurfer extends util.Observer {
 
 		// responsive debounced event listener. If this.params.responsive is not
 		// set, this is never called. Use 100ms or this.params.responsive as
-		// timeout for the debounce function.
+    // timeout for the debounce（去抖动;防反跳;防抖动;弹跳;抖动消除） function.
+    // debounce安装的npm包，被包在了util类中
+    // @todo，应该应用到绘图库中
 		let prevWidth = 0;
 		this._onResize = util.debounce(
 			() => {
@@ -615,11 +620,11 @@ export default class WaveSurfer extends util.Observer {
 		});
 
     // Click-to-seek
-    if (this.params.enableClickToSeek) {
-      this.drawer.on('click', (e, progress) => {
-        setTimeout(() => this.seekTo(progress), 0);
-      })
-    }
+		this.drawer.on('click', (e, progress) => {
+			if (this.params.enableClickToSeek) {
+				setTimeout(() => this.seekTo(progress), 0);
+			}
+		})
 		
 		// Relay the scroll event from the drawer
 		this.drawer.on('scroll', e => {
@@ -664,6 +669,7 @@ export default class WaveSurfer extends util.Observer {
 		this.backend.on('play', () => this.fireEvent('play'));
 		this.backend.on('pause', () => this.fireEvent('pause'));
 
+    // 监听播放过程事件
 		this.backend.on('audioprocess', time => {
 			this.drawer.progress(this.backend.getPlayedPercents());
 			this.fireEvent('audioprocess', time);

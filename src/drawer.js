@@ -307,7 +307,7 @@ export default class Drawer extends util.Observer {
 	 */
 	progress(progress) {
 		const minPxDelta = 1 / this.params.pixelRatio;
-		const pos = Math.round(progress * this.width) * minPxDelta;
+    const pos = Math.round(progress * this.width) * minPxDelta;
 
 		if (pos < this.lastPos || pos - this.lastPos >= minPxDelta) {
 			this.lastPos = pos;

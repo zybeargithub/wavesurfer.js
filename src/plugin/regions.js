@@ -232,8 +232,6 @@ class Region {
 		this.firedOut = false;
 
 		const onProcess = time => {
-      console.log('time', Math.round(time * 100) / 100, '  --> start:', this.start + '-->end:', this.end)
-
 			if (
 				!this.firedOut &&
 				this.firedIn &&
@@ -784,6 +782,7 @@ export default class RegionsPlugin {
 		};
 		this.wrapper.addEventListener('mousedown', eventDown);
 		this.wrapper.addEventListener('touchstart', eventDown);
+		
 		this.on('disable-drag-selection', () => {
 			this.wrapper.removeEventListener('touchstart', eventDown);
 			this.wrapper.removeEventListener('mousedown', eventDown);

@@ -259,6 +259,7 @@ export default class CursorPlugin {
 				left: `${xpos}px`,
 				top: `${ypos}px`
 			});
+			this.timeValue = timeValue
 			this.displayTime.innerHTML = `${formatValue}`;
 		}
 	}
